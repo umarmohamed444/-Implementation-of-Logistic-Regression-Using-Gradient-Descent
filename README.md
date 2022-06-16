@@ -90,12 +90,12 @@ plt.show()
 ~~~
 
 ## Output:
-![Github Logo](1(1).png)
-![Github Logo](2(1).png)
-![Github Logo](3(1).png)
-![Github Logo](4(1).png)
-![Github Logo](5(1).png)
-![Github Logo](6(1).png)
+![Github Logo](ml1.png)
+![Github Logo](ml2.png)
+![Github Logo](ml3.png)
+![Github Logo](ml4.png)
+![Github Logo](ml5.png)
+![Github Logo](ml6.png)
 
 
 ## Result:
