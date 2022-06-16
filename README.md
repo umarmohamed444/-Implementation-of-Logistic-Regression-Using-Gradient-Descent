@@ -14,60 +14,85 @@ To write a program to implement the the Logistic Regression Using Gradient Desce
 4. 
 
 ## Program:
-```
+~~~
 /*
 Program to implement the the Logistic Regression Using Gradient Descent.
 Developed by:Umar Mohamed E 
 RegisterNumber:212220040173
-~~~
-import numpy as np
-def hypothesis(X,theta):
-    z=np.dot(theta,X.T)
-    s=1/(1+np.exp(-(z)))
-    return s
-def cost(X,y,theta):
-    y1=hypothesis(X,theta)
-    c=-(1/len(x))*np.sum(y*np.log(y1)+(1-y)*np.log(1-y1))
-    return c
-def gradient_descent(X,y,theta,alpha,iterations):
-    m=len(X)
-    J=[cost(X,y,theta)]
-    for i in range(iterations):
-        h=hypothesis(X,theta)
-        for i in range(len(X.columns)):
-            theta[i]=theta[i]-(alpha/m)*np.sum((h-y)-*X.iloc[:,i])
-            J.append(cost(X,y,theta))
-            return J ,theta
-        def predict(X,y,theta,alpha, iterations):
-Automatic O
-50%
-70%
-J,th-gradient_descent(X,y,theta,alpha, iterations)
-h-hypothesis (X,theta)
-y pred=[]
-for i in range(len(h));
-if h[i]>-0.5:
-else:
-return J,y_pred
-y_pred.append(1)
-y_pred.append(0)
-import pandas as pd
-data-pd.read_excel("Placement_Data.xlsx")
-data.head()
-data1=data copy()
-data1=datal.drop(["sl_no","salary"],axis=1)
-data1.head()
-data1.isnull().sum()
-data1.duplicated().sum()
-from sklearn.preprocessing import LabelEncoder
-le=LabelEncoder()
-data1 ["gender"]=le.fit_transform(data1 ["gender"])
-~~~
 */
-```
+#importing packages
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+#reading and displaying dataframe
+df=pd.read_csv("Social_Network_Ads (1).csv")
+df
+
+#assigning x and y and displaying them
+x=df.iloc[:,[2,3]].values
+y=df.iloc[:,4].values 
+
+#splitting data into train and test
+from sklearn.model_selection import train_test_split
+xtrain,xtest,ytrain,ytest=train_test_split(x,y,test_size=0.25,random_state=0)
+
+#scaling values and obtaining scaled array of train and test of x
+from sklearn.preprocessing import StandardScaler
+sc_x=StandardScaler()
+xtrain=sc_x.fit_transform(xtrain)
+xtest=sc_x.fit_transform(xtest)
+
+#applying logistic regression to the scaled array
+from sklearn.linear_model import LogisticRegression
+c=LogisticRegression(random_state=0)
+c.fit(xtrain,ytrain)
+
+#finding predicted values of y
+ypred=c.predict(xtest)
+ypred
+
+#calculating confusion matrix
+from sklearn.metrics import confusion_matrix
+cm=confusion_matrix(ytest,ypred)
+cm
+
+#calculating accuracy score
+from sklearn import metrics
+acc=metrics.accuracy_score(ytest,ypred)
+acc
+
+#calculating recall sensitivity and specificity
+r_sens=metrics.recall_score(ytest,ypred,pos_label=1)
+r_spec=metrics.recall_score(ytest,ypred,pos_label=0)
+r_sens,r_spec
+
+#displaying regression 
+from matplotlib.colors import ListedColormap
+import matplotlib.pyplot as plt
+xs,ys=xtrain,ytrain
+x1,x2=np.meshgrid(np.arange(start=xs[:,0].min()-1,stop=xs[:,0].max()+1,step=0.01),
+               np.arange(start=xs[:,1].min()-1,stop=xs[:,1].max()+1,step=0.01))
+plt.contourf(x1,x2,c.predict(np.array([x1.ravel(),x2.ravel()]).T).reshape(x1.shape),
+                            alpha=0.75,cmap=ListedColormap(("pink","purple")))
+plt.xlim(x1.min(),x2.max())
+plt.ylim(x2.min(),x1.max())
+for i,j in enumerate(np.unique(ys)):
+    plt.scatter(xs[ys==j,0],xs[ys==j,1],
+                c=ListedColormap(("white","violet"))(i),label=j)
+plt.title("Logistic Regression(Training Set)")
+plt.xlabel("Age")
+plt.ylabel("Estimated Salary")
+plt.legend()
+plt.show()
+~~~
 
 ## Output:
-![logistic regression using gradient descent](sam.png)
+![Github Logo](1(1).png)
+![Github Logo](2(1).png)
+![Github Logo](3(1).png)
+![Github Logo](4(1).png)
+![Github Logo](5(1).png)
+![Github Logo](6(1).png)
 
 
 ## Result:
